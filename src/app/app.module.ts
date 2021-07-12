@@ -7,18 +7,24 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './paginas/login/login.component';
 import { PrincipalComponent } from './paginas/principal/principal.component';
 import { TablaComponent } from './paginas/tabla/tabla.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { MatriculaComponent } from './paginas/matricula/matricula.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     PrincipalComponent,
-    TablaComponent
+    TablaComponent,
+    MatriculaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

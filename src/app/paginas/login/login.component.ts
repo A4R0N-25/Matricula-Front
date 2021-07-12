@@ -16,8 +16,12 @@ export class LoginComponent implements OnInit {
     correo: new FormControl('',[Validators.required,Validators.email]),
     password: new FormControl('',[Validators.required]),
   });
-
+  
   ngOnInit() {
+    //sessionStorage.setItem('nombre','Brandon');
+    if(sessionStorage.getItem('nombre')!=null){
+      this.route.navigate(["principal"]);
+    }
   }
 
   Verificar(){
@@ -30,6 +34,8 @@ export class LoginComponent implements OnInit {
         showConfirmButton: false,
         timer: 1500
       })
+      var correo =this.login.controls['correo'].value.split("@");
+      sessionStorage.setItem('nombre',correo[0]);
       this.route.navigate(["principal"]);
     }else{
       Swal.fire({
