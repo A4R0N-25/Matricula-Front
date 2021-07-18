@@ -4,7 +4,7 @@
       height="72">
     <h1 class="h3 mb-3 font-weight-normal">Inicie Sessión</h1>
     <label for="inputEmail" class="sr-only">Correo Electronico</label>
-    <input type="correo" class="form-control" formControlName="correo" placeholder="dayandun@espe.edu.ec">
+    <input type="correo" class="form-control" formControlName="correo" placeholder="ejemplo@tutia.com">
     <div *ngIf="login.controls['correo'].invalid && (login.controls['correo'].dirty || login.controls['correo'].touched)" class="alert alert-danger">
 
       <div *ngIf="login.controls['correo'].errors?.required">

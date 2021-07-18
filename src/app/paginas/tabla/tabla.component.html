@@ -1,3 +1,169 @@
-<p>
-  tabla works!
-</p>
+<div id="filtro">
+  <h1>Busqueda de Materias</h1>
+  <div class="example-container">
+    <form [formGroup]="busqueda" (ngSubmit)="Filtrar()">
+      <mat-form-field appearance="fill" class="formulario">
+        <mat-select formControlName="periodo" required [(ngModel)]="periodo" (selectionChange)="seleccion()">
+          <mat-option>-- None --</mat-option>
+          <mat-option *ngFor="let per of listaPeriodos" [value]="per.codigo">{{ per.nombre }}</mat-option>
+        </mat-select>
+        <mat-label>
+          <mat-icon>date_range</mat-icon> <b> Periodo</b>
+        </mat-label>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="formulario">
+        <mat-select formControlName="departamento" required [(ngModel)]="departamento"
+          (selectionChange)="seleccion()">
+          <mat-option>-- None --</mat-option>
+          <mat-option *ngFor="let dep of listaDepartamentos" [value]="dep.codigo">{{ dep.nombre }}</mat-option>
+        </mat-select>
+        <mat-label>
+          <mat-icon>apartment</mat-icon> <b> Departamento</b>
+        </mat-label>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="formulario">
+        <mat-select formControlName="materia" required [(ngModel)]="asignatura">
+          <mat-option>-- None --</mat-option>
+          <mat-option *ngFor="let asig of listaAsignaturas" [value]="asig.codigo">{{ asig.nombre }}</mat-option>
+        </mat-select>
+        <mat-label>
+          <mat-icon>school</mat-icon> <b> Materia</b>
+        </mat-label>
+      </mat-form-field>
+      <button mat-fab color="primary" type="submit">
+        <mat-icon>manage_search</mat-icon>
+      </button>
+    </form>
+  </div>
+</div>
+
+
+<div #collapse="ngbCollapse" [(ngbCollapse)]="buscar">
+  <div class="clearfix"></div>
+
+  <div class="encabezado">
+    <h1><b>Resultados</b></h1>
+    <h2><b>Periodo</b> PREGRADO S-I MAY21 - SEP21</h2>
+    <h2><b>Departamento</b> CIENCIAS DE LA COMPUTACION</h2>
+    <h2><b>Asignatura</b> APLICACIONES DISTRIBUIDAS</h2>
+
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <td><b>NRC:</b>1351</td>
+          <td><b>Cupo:</b></td>
+          <td><b>Disponible:</b>20</td>
+          <td><b>N° de Creditos:</b>15</td>
+          <td>
+            <b>Horario</b><br>
+            <table>
+              <thead>
+                <th>Lunes</th>
+                <th>Martes</th>
+                <th>Miercoles</th>
+                <th>Jueves</th>
+                <th>Viernes</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>15:30 - 17:30</td>
+                  <td>15:30 - 17:30</td>
+                  <td></td>
+                  <td></td>
+                  <td>15:30 - 17:30</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td><b>NRC:</b>1351</td>
+          <td><b>Cupo:</b></td>
+          <td><b>Disponible:</b>20</td>
+          <td><b>N° de Creditos:</b>15</td>
+          <td>
+            <b>Horario</b><br>
+            <table>
+              <thead>
+                <th>Lunes</th>
+                <th>Martes</th>
+                <th>Miercoles</th>
+                <th>Jueves</th>
+                <th>Viernes</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>15:30 - 17:30</td>
+                  <td>15:30 - 17:30</td>
+                  <td></td>
+                  <td></td>
+                  <td>15:30 - 17:30</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td><b>NRC:</b>1351</td>
+          <td><b>Cupo:</b></td>
+          <td><b>Disponible:</b>20</td>
+          <td><b>N° de Creditos:</b>15</td>
+          <td>
+            <b>Horario</b><br>
+            <table>
+              <thead>
+                <th>Lunes</th>
+                <th>Martes</th>
+                <th>Miercoles</th>
+                <th>Jueves</th>
+                <th>Viernes</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>15:30 - 17:30</td>
+                  <td>15:30 - 17:30</td>
+                  <td></td>
+                  <td></td>
+                  <td>15:30 - 17:30</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td><b>NRC:</b>1351</td>
+          <td><b>Cupo:</b></td>
+          <td><b>Disponible:</b>20</td>
+          <td><b>N° de Creditos:</b>15</td>
+          <td>
+            <b>Horario</b><br>
+            <table>
+              <thead>
+                <th>Lunes</th>
+                <th>Martes</th>
+                <th>Miercoles</th>
+                <th>Jueves</th>
+                <th>Viernes</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>15:30 - 17:30</td>
+                  <td>15:30 - 17:30</td>
+                  <td></td>
+                  <td></td>
+                  <td>15:30 - 17:30</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>

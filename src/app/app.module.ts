@@ -10,6 +10,13 @@ import { TablaComponent } from './paginas/tabla/tabla.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatriculaComponent } from './paginas/matricula/matricula.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatButtonModule} from '@angular/material/button';
+import { LoginServiceService } from './services/loginService.service';
+import { HttpClientModule } from '@angular/common/http';
+import { ServiciosService } from './services/servicios/Servicios.service';
 
 @NgModule({
   declarations: [
@@ -24,9 +31,14 @@ import { MatriculaComponent } from './paginas/matricula/matricula.component';
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    NgbModule,
+    MatButtonModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [LoginServiceService,ServiciosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
