@@ -1,3 +1,4 @@
+<div style="overflow-y: scroll; height: 100%;">
 <div id="filtro">
   <h1>Busqueda de Materias</h1>
   <div class="example-container">
@@ -40,7 +41,7 @@
 </div>
 
 
-<div #collapse="ngbCollapse" [(ngbCollapse)]="buscar">
+<div #collapse="ngbCollapse" [(ngbCollapse)]="buscar" style="overflow: overlay; height: 100%;">
   <div class="clearfix"></div>
 
   <div class="encabezado">
@@ -54,14 +55,15 @@
   <div class="table-responsive">
     <table class="table table-bordered">
       <tbody>
-        <tr>
-          <td><b>NRC:</b>1351</td>
-          <td><b>Cupo:</b></td>
-          <td><b>Disponible:</b>20</td>
-          <td><b>N° de Creditos:</b>15</td>
+        <tr *ngFor="let per of listaCursos">
+          <td><b>NRC: </b>{{per.nrc}}</td>
+          <td><b>Cupo: </b>{{per.cupo}}</td>
+          <td><b>Disponible: </b>{{per.disponible}}</td>
+          <td><b>N° de Creditos: </b>{{per.creditos}}</td>
+          <td><b>Carreras:</b>{{per.carreras}}</td>
           <td>
             <b>Horario</b><br>
-            <table>
+            <table style="width: 100%;">
               <thead>
                 <th>Lunes</th>
                 <th>Martes</th>
@@ -71,99 +73,20 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>15:30 - 17:30</td>
-                  <td>15:30 - 17:30</td>
-                  <td></td>
-                  <td></td>
-                  <td>15:30 - 17:30</td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td><b>NRC:</b>1351</td>
-          <td><b>Cupo:</b></td>
-          <td><b>Disponible:</b>20</td>
-          <td><b>N° de Creditos:</b>15</td>
-          <td>
-            <b>Horario</b><br>
-            <table>
-              <thead>
-                <th>Lunes</th>
-                <th>Martes</th>
-                <th>Miercoles</th>
-                <th>Jueves</th>
-                <th>Viernes</th>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>15:30 - 17:30</td>
-                  <td>15:30 - 17:30</td>
-                  <td></td>
-                  <td></td>
-                  <td>15:30 - 17:30</td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td><b>NRC:</b>1351</td>
-          <td><b>Cupo:</b></td>
-          <td><b>Disponible:</b>20</td>
-          <td><b>N° de Creditos:</b>15</td>
-          <td>
-            <b>Horario</b><br>
-            <table>
-              <thead>
-                <th>Lunes</th>
-                <th>Martes</th>
-                <th>Miercoles</th>
-                <th>Jueves</th>
-                <th>Viernes</th>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>15:30 - 17:30</td>
-                  <td>15:30 - 17:30</td>
-                  <td></td>
-                  <td></td>
-                  <td>15:30 - 17:30</td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td><b>NRC:</b>1351</td>
-          <td><b>Cupo:</b></td>
-          <td><b>Disponible:</b>20</td>
-          <td><b>N° de Creditos:</b>15</td>
-          <td>
-            <b>Horario</b><br>
-            <table>
-              <thead>
-                <th>Lunes</th>
-                <th>Martes</th>
-                <th>Miercoles</th>
-                <th>Jueves</th>
-                <th>Viernes</th>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>15:30 - 17:30</td>
-                  <td>15:30 - 17:30</td>
-                  <td></td>
-                  <td></td>
-                  <td>15:30 - 17:30</td>
+                  <td>{{listaHorario.LUN}}</td>
+                  <td>{{listaHorario.MAR}}</td>
+                  <td>{{listaHorario.MIE}}</td>
+                  <td>{{listaHorario.JUE}}</td>
+                  <td>{{listaHorario.VIE}}</td>
                 </tr>
               </tbody>
             </table>
           </td>
         </tr>
 
+
       </tbody>
     </table>
   </div>
+</div>
 </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Asignatura } from 'src/app/model/asignatura';
+import { Curso } from 'src/app/model/curso';
 import { Departmanento } from 'src/app/model/departamento';
 import { Periodo } from 'src/app/model/periodo';
 import { ServiciosService } from 'src/app/services/servicios/Servicios.service';
@@ -25,6 +26,12 @@ export class TablaComponent implements OnInit {
   listaDepartamentos : Departmanento[] =[];
   listaPeriodos: Periodo[]=[];
   listaAsignaturas: Asignatura[]=[]
+  listaCursos: Curso[]=[]
+  listaHorario = {
+    "LUN": "", "MAR":"","MIE":"","JUE":"","VIE":""
+  }
+  dias=["LUN", "MAR","MIE","JUE","VIE"]
+
 
   periodo: number=0;
   departamento: number =0;
@@ -94,8 +101,28 @@ export class TablaComponent implements OnInit {
 
   getCursos(){
     this.service.getCursos(this.asignatura, this.periodo).subscribe(res => {
+      this.listaCursos.length=0
       console.log(res)
+      res.forEach((element: { nrc: any; cupo: any; disponible: any; creditos: any; carreras: any; horarios: any; }) => {
+        this.listaCursos.push({
+          nrc: element.nrc,
+          cupo: element.cupo,
+          disponible: element.disponible,
+          creditos: element.creditos,
+          carreras: element.carreras,
+          horarios: element.horarios
+        })
+        element.horarios.forEach((hor:any) => {
+          hor.dia == "LUN" ? this.listaHorario.LUN=hor.horaInicio.toString().replace(/.^\:00$/,"")+" - "+hor.horaFin.toString() : null
+          hor.dia == "MAR" ? this.listaHorario.MAR=hor.horaInicio.toString()+" - "+hor.horaFin.toString() : null
+          hor.dia == "MIE" ? this.listaHorario.MIE=hor.horaInicio.toString()+" - "+hor.horaFin.toString() : null
+          hor.dia == "JUE" ? this.listaHorario.JUE=hor.horaInicio.toString()+" - "+hor.horaFin.toString() : null
+          hor.dia == "VIE" ? this.listaHorario.VIE=hor.horaInicio.toString()+" - "+hor.horaFin.toString() : null
+        });
+        
+      });
     })
+    console.log("Cursos:"+this.listaCursos)
   }
 
 }
