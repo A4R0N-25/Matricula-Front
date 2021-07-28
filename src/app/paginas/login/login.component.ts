@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
         showConfirmButton: false,
         timer: 1500
       })
+      sessionStorage.setItem('correo', this.login.controls['correo'].value)
       var correo = this.login.controls['correo'].value.split("@");
       sessionStorage.setItem('nombre', correo[0]);
       this.route.navigate(["principal"]);

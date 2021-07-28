@@ -1,3 +1,42 @@
-<p>
-  matricula works!
-</p>
+<div class="example-container">
+  <form [formGroup]="busqueda" (ngSubmit)="matricularse()">
+    <h2><b>Seleccione un periodo</b></h2>
+    <mat-form-field appearance="fill" class="formulario">
+      <mat-select formControlName="periodo" required [(ngModel)]="per" (selectionChange)="seleccion()">
+        <mat-option>-- None --</mat-option>
+        <mat-option *ngFor="let per of listaPeriodos" [value]="per.codigo">{{ per.nombre }}</mat-option>
+      </mat-select>
+      <mat-label>
+        <mat-icon>date_range</mat-icon> <b> Periodo</b>
+      </mat-label>
+    </mat-form-field>
+
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="nrc" style="overflow: overlay; height: 100%;">
+      <div class="clearfix"></div>
+      <h3><b>Seleccione sus cursos:</b></h3>
+      <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>Ingrese el NRC</mat-label>
+        <input matInput type="number" formControlName="curso" [(ngModel)]="codigoCurso">
+      </mat-form-field>
+      <a mat-fab color="primary" (click)="addNRC()">
+        <mat-icon>add</mat-icon>
+      </a>
+
+      <h4><b>Cretidos totales (max 50):</b> {{creditos}}</h4>
+      <h4><b>Cursos agregados:</b></h4>
+      <ul>
+        <div *ngFor="let cur of cursos">
+          <li><b>{{cur.nrc}} : </b>{{cur.asignatura}} 
+            <a mat-mini-fab color="warn" aria-label="Example icon button with a delete icon" (click)="borrarCurso(cur.nrc)">
+            <mat-icon>delete</mat-icon>
+            </a></li>
+        </div>
+      </ul>
+
+    </div>
+
+    <br>
+    <button mat-raised-button color="primary" type="submit">Matricularse</button>
+
+  </form>
+</div>

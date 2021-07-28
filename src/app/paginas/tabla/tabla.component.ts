@@ -70,10 +70,11 @@ export class TablaComponent implements OnInit {
     this.listaPeriodos=[];
     this.service.getPeriodos().subscribe(res => {
       this.listaPeriodos.length=0
-      res.forEach((element: { codigo: any; nombre: any; }) => {
+      res.forEach((element: { codigo: any; nombre: any; estado: any; }) => {
         this.listaPeriodos.push({
           codigo: element.codigo,
-          nombre: element.nombre
+          nombre: element.nombre,
+          estado: element.estado
         })
       });
     })
@@ -103,10 +104,12 @@ export class TablaComponent implements OnInit {
     this.service.getCursos(this.asignatura, this.periodo).subscribe(res => {
       this.listaCursos.length=0
       console.log(res)
-      res.forEach((element: { nrc: any; cupo: any; disponible: any; creditos: any; carreras: any; horarios: any; }) => {
+      res.forEach((element: {codigo: any; nrc: any; cupo: any; asignatura: any; disponible: any; creditos: any; carreras: any; horarios: any; }) => {
         this.listaCursos.push({
+          codigo: element.codigo,
           nrc: element.nrc,
           cupo: element.cupo,
+          asignatura: element.asignatura,
           disponible: element.disponible,
           creditos: element.creditos,
           carreras: element.carreras,

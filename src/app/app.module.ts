@@ -17,6 +17,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { LoginServiceService } from './services/loginService.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiciosService } from './services/servicios/Servicios.service';
+import {MatInputModule} from '@angular/material/input';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { ServiciosService } from './services/servicios/Servicios.service';
     MatSelectModule,
     NgbModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatInputModule
   ],
   providers: [LoginServiceService,ServiciosService],
   bootstrap: [AppComponent]

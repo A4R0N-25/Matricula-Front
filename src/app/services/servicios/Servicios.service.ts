@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Asignatura } from 'src/app/model/asignatura';
 import { Departmanento } from 'src/app/model/departamento';
+import { MatriculaRQ } from 'src/app/model/matriculaRQ';
 import { Periodo } from 'src/app/model/periodo';
 
 @Injectable({
@@ -30,6 +31,14 @@ getAsignaturas(departamento:number,periodo:number):Observable<any>{
 
 getCursos(asignatura:number, periodo:number): Observable<any>{
   return this.http.get(this.Url+"curso/"+asignatura+"/"+periodo);
+}
+
+getCurso(nrc:number): Observable<any>{
+  return this.http.get(this.Url+"curso/"+nrc);
+}
+
+matricularse(matricula:MatriculaRQ){
+  return this.http.post(this.Url+"matricula/",matricula);
 }
 
 }
