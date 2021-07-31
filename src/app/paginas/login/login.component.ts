@@ -28,6 +28,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  registrar(){
+    this.route.navigate(["registrar"])
+  }
+
   Verificar() {
     let user = new Login();
     user.correo = this.login.controls['correo'].value;

@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { element } from 'protractor';
 import { Curso } from 'src/app/model/curso';
+import { Matricula } from 'src/app/model/matricula';
 import { MatriculaRQ } from 'src/app/model/matriculaRQ';
 import { Periodo } from 'src/app/model/periodo';
 import { ServiciosService } from 'src/app/services/servicios/Servicios.service';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatriculaDetalle } from 'src/app/model/matriculaDetalle';
 
 @Component({
   selector: 'app-matricula',
@@ -14,7 +17,7 @@ import Swal from 'sweetalert2'
 })
 export class MatriculaComponent implements OnInit {
 
-  constructor(private service: ServiciosService) { }
+  constructor(private service: ServiciosService, private _snackBar: MatSnackBar) { }
 
   busqueda = new FormGroup({
     periodo: new FormControl('', [Validators.required]),
@@ -31,15 +34,30 @@ export class MatriculaComponent implements OnInit {
 
   cursos: Curso[] = []
 
-  creditos:number=0
+  creditos: number = 0
 
   codigoCurso: any
 
   matricula: MatriculaRQ | undefined
 
+  matriculaInfo: Matricula = new Matricula
 
   ngOnInit() {
     this.getPeriodos()
+
+  }
+
+  buscarMatricula() {
+    this.service.buscarMatricula(sessionStorage.getItem('correo'), this.per).subscribe(res => {
+      console.log(res)
+      this.matriculaInfo = {
+        codigo: res.codigo,
+        periodo: res.periodo,
+        fecha: res.fecha,
+        creditosTotales: res.creditosTotales,
+        detalles: res.detalle
+      }
+    })
   }
 
   getPeriodos() {
@@ -60,29 +78,31 @@ export class MatriculaComponent implements OnInit {
 
   seleccion() {
     if (this.per != 0 && this.per != undefined) {
+      this.buscarMatricula();
       this.nrc = false;
     } else {
+      this.matriculaInfo=new Matricula
       this.nrc = true
     }
   }
 
   addNRC() {
-    if(this.cursos.length==0){
+    if (this.cursos.length == 0) {
       this.addToCursos()
-    }else{
+    } else {
       console.log("dos")
-      let repetido=false;
+      let repetido = false;
       this.cursos.forEach(data => {
         if (data.nrc == this.codigoCurso) {
           Swal.fire('NRC ya agregado')
-          repetido=true
-        } 
+          repetido = true
+        }
       })
-      if(!repetido){
-      this.addToCursos()
+      if (!repetido) {
+        this.addToCursos()
+      }
     }
   }
-}
 
   addToCursos() {
     this.service.getCurso(this.codigoCurso).subscribe(res => {
@@ -98,40 +118,86 @@ export class MatriculaComponent implements OnInit {
         horarios: res.horarios
       })
     }, error => {
-      Swal.fire('NRC no encontrado')
+      this._snackBar.open("NRC no encontrado", "cerrar");
     })
   }
 
 
-  matricularse(){
-    if(this.busqueda.controls['periodo'].valid && this.cursos.length>0){
+  matricularse() {
+    if (this.busqueda.controls['periodo'].valid && this.cursos.length > 0) {
       this.matricula = {
-        correo : sessionStorage.getItem('correo'),
+        matricula: this.matriculaInfo?.codigo,
+        correo: sessionStorage.getItem('correo'),
         periodo: this.per,
         cursos: []
       }
-      this.cursos.forEach(data =>{
+      this.cursos.forEach(data => {
         this.matricula?.cursos.push(data.codigo)
       })
-      console.log("Matricula:"+this.matricula.correo)
-      console.log("Matricula:"+this.matricula.periodo)
-      console.log("Matricula:"+this.matricula.cursos)
+      this.cursos = []
+      this.creditos=0
+      console.log("Matricula:" + this.matricula.matricula)
+      console.log("Matricula:" + this.matricula.correo)
+      console.log("Matricula:" + this.matricula.periodo)
+      console.log("Matricula:" + this.matricula.cursos)
       this.service.matricularse(this.matricula).subscribe(res => {
+        this.buscarMatricula()
         Swal.fire('Matriculado exitosamente')
-      }, error =>{
-        Swal.fire('No se realizo la matricula')
+      }, error => {
+        //Swal.fire('No se realizo la matricula')
+        console.log(error.error)
+        error.error.forEach((element: string) => {
+          console.log("error: " + element)
+          this._snackBar.open(element, "cerrar");
+          setTimeout(() => {
+            
+          }, 200);
+        });
       })
-    }else{
+    } else {
       Swal.fire('Debe seleccionar un periodo y almenos una materia')
     }
   }
 
 
-  borrarCurso(cur:number){
+  borrarCurso(cur: number) {
     this.cursos = this.cursos.filter(item => item.nrc !== cur);
-    this.creditos=0
+    this.creditos = 0
     this.cursos.forEach(element => {
-      this.creditos +=element.creditos
+      this.creditos += element.creditos
     })
   }
+
+  borrarDetalleMatricula(detalle: MatriculaDetalle) {
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: "Estas apunto de borrar "+detalle.materia+"("+ detalle.nrc+")",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Continuar',
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.service.borrarDetalleMatricula(detalle.codigo).subscribe(res => {
+          this.buscarMatricula()
+          Swal.fire(
+            'Eliminado!',
+            'La materia: '+detalle.nrc+" - "+detalle.materia,
+            'success'
+          )
+        }, error =>{
+          Swal.fire(
+            'No se logro eliminar!',
+            'La materia: '+detalle.nrc+" - "+detalle.materia,
+            'error'
+          )
+        })
+
+      }
+    })
+
+  }
 }
+

@@ -1,0 +1,122 @@
+<body class="text-center">
+  <form class="form-signin" [formGroup]="registrar" (ngSubmit)="registrarse()">
+    <img class="mb-4" src="https://www.espe.edu.ec/wp-content/uploads/2018/11/espe.png" alt="" width="250"
+      height="72">
+    <h1 class="h3 mb-3 font-weight-normal"><b>Registrese</b></h1>
+    <mat-form-field appearance="fill" class="formulario">
+      <mat-select formControlName="tipo" required>
+        <mat-option>-- None --</mat-option>
+        <mat-option value="PAS">Pasaporte</mat-option>
+        <mat-option value="CED">Cedula</mat-option>
+      </mat-select>
+      <mat-label>
+        <mat-icon>badge</mat-icon> <b> Tipo Identificacion</b>
+      </mat-label>
+    </mat-form-field>
+    <br>
+    <label>Idetificacion</label>
+    <input type="text" class="form-control" formControlName="identificacion" placeholder="1878910211" pattern="[0-9]{10}">
+    <div *ngIf="registrar.controls['identificacion'].invalid && (registrar.controls['identificacion'].dirty || registrar.controls['identificacion'].touched)" class="alert alert-danger">
+
+      <div *ngIf="registrar.controls['identificacion'].errors?.required">
+       Se requiere una identificacion
+      </div>
+      <div *ngIf="registrar.controls['identificacion'].invalid && registrar.controls['identificacion'].value!=''">
+        Informacion Incorrecta
+       </div>
+    </div><br>
+    <label>Nombre</label>
+    <input type="text" class="form-control" formControlName="nombre" placeholder="Daniel" pattern="[A-Za-z]{0,50}">
+    <div *ngIf="registrar.controls['nombre'].invalid && (registrar.controls['nombre'].dirty || registrar.controls['nombre'].touched)" class="alert alert-danger">
+
+      <div *ngIf="registrar.controls['nombre'].errors?.required">
+       Se requiere un nombre
+      </div>
+      <div *ngIf="registrar.controls['nombre'].invalid && registrar.controls['nombre'].value!=''">
+        No se admiten numeros u otro tipo de caracteres
+       </div>
+    </div><br>
+    <label>Apellido</label>
+    <input type="text" class="form-control" formControlName="apellido" placeholder="Yandun" pattern="[A-Za-z]{0,50}">
+    <div *ngIf="registrar.controls['apellido'].invalid && (registrar.controls['apellido'].dirty || registrar.controls['apellido'].touched)" class="alert alert-danger">
+
+      <div *ngIf="registrar.controls['apellido'].errors?.required">
+       Se requiere un apellido
+      </div>
+      <div *ngIf="registrar.controls['apellido'].invalid && registrar.controls['apellido'].value!=''">
+        No se admiten numeros u otro tipo de caracteres
+       </div>
+    </div><br>
+    <mat-form-field appearance="fill" class="formulario">
+      <mat-select formControlName="career" required>
+        <mat-option>-- None --</mat-option>
+        <mat-option *ngFor="let car of carreras" [value]="car.codigo">{{ car.nombre }}</mat-option>
+      </mat-select>
+      <mat-label>
+        <mat-icon>school</mat-icon> <b> Carrera</b>
+      </mat-label>
+    </mat-form-field><br>
+    <label>Correo Electronico</label>
+    <input type="correo" class="form-control" formControlName="correo" placeholder="ejemplo@tutia.com">
+    <div *ngIf="registrar.controls['correo'].invalid && (registrar.controls['correo'].dirty || registrar.controls['correo'].touched)" class="alert alert-danger">
+
+      <div *ngIf="registrar.controls['correo'].errors?.required">
+       Se requiere un correo electronico
+      </div>
+      <div *ngIf="registrar.controls['correo'].errors?.email">
+        Correo Invalido
+      </div>
+    </div><br>
+    <label>Contraseña</label>
+    <input type="password" class="form-control" formControlName="password" placeholder="contraseña">
+    <div *ngIf="registrar.controls['password'].invalid && (registrar.controls['password'].dirty || registrar.controls['password'].touched)" class="alert alert-danger">
+
+      <div *ngIf="registrar.controls['password'].errors?.required">
+        Se requiere la constraseña
+      </div>
+    </div><br>
+    <label>Repita la Contraseña</label>
+    <input type="password" class="form-control" formControlName="repassword" placeholder="repita contraseña">
+    <div *ngIf="registrar.controls['repassword'].invalid && (registrar.controls['repassword'].dirty || registrar.controls['repassword'].touched)" class="alert alert-danger">
+
+      <div *ngIf="registrar.controls['repassword'].errors?.required">
+        Se requiere la constraseña
+      </div>
+    </div>
+    <div *ngIf="registrar.controls['password'].value != registrar.controls['repassword'].value" class="alert alert-danger">
+      Las constraseñas no coinciden
+    </div><br>
+    <mat-form-field appearance="fill" class="formulario">
+      <mat-select formControlName="genero" required>
+        <mat-option>-- None --</mat-option>
+        <mat-option value="MAS">Masculino</mat-option>
+        <mat-option value="FEM">Femenino</mat-option>
+        <mat-option value="OTR">Otro</mat-option>
+      </mat-select>
+      <mat-label>
+        <mat-icon>emoji_people</mat-icon> <b> Genero</b>
+      </mat-label>
+    </mat-form-field><br>
+    <label>Telefono</label>
+    <input type="text" class="form-control" formControlName="telefono" placeholder="0960122383" pattern="[0-9]{10}">
+    <div *ngIf="registrar.controls['telefono'].invalid && (registrar.controls['telefono'].dirty || registrar.controls['telefono'].touched)" class="alert alert-danger">
+
+      <div *ngIf="registrar.controls['telefono'].errors?.required">
+       Se requiere un telefono
+      </div>
+      <div *ngIf="registrar.controls['telefono'].invalid && registrar.controls['telefono'].value!=''">
+        Invalido
+       </div>
+    </div><br>
+    <label>Dirección</label>
+    <input type="text" class="form-control" formControlName="direccion" placeholder="Quito, Av.Maldonado">
+    <div *ngIf="registrar.controls['direccion'].invalid && (registrar.controls['direccion'].dirty || registrar.controls['direccion'].touched)" class="alert alert-danger">
+
+      <div *ngIf="registrar.controls['direccion'].errors?.required">
+       Se requiere una dirección
+      </div>
+    </div><br>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+    <br>
+  </form>
+</body>

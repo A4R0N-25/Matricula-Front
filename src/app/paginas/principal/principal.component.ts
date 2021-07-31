@@ -13,8 +13,8 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
   { path: '/principal', opcion:undefined, title: 'Sistema de Matriculas', icon: 'home', class: 'active' },
   { path: '/principal/busqueda', opcion:'busqueda', title: 'Busqueda de Materias', icon: 'manage_search', class: '' },
-  { path: '/principal/matricula', opcion:'matricula', title: 'Matricularse', icon: 'post_add', class: '' },
-  { path: '/periodo', opcion:'periodo', title: 'Periodo', icon: 'list_alt', class: '' }
+  { path: '/principal/matricularse', opcion:'matricularse', title: 'Matricularse', icon: 'post_add', class: '' },
+  { path: '/principal/matriculas', opcion:'matriculas', title: 'Mis Matriculas', icon: 'list_alt', class: '' }
 
 ];
 

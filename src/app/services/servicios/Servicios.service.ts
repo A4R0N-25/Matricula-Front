@@ -11,34 +11,50 @@ import { Periodo } from 'src/app/model/periodo';
 })
 export class ServiciosService {
 
-constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-Url='http://localhost:8080/api/';
-
-
-getDepartamentos(): Observable<any>{
-  return this.http.get<Departmanento>(this.Url+"departamento/");
-}
+  Url = 'http://localhost:8080/api/';
 
 
-getPeriodos(): Observable<any>{
-  return this.http.get<Periodo>(this.Url+"periodo/");
-}
+  getDepartamentos(): Observable<any> {
+    return this.http.get<Departmanento>(this.Url + "departamento/");
+  }
 
-getAsignaturas(departamento:number,periodo:number):Observable<any>{
-  return this.http.get<Asignatura>(this.Url+"asignatura/"+departamento+"/"+periodo);
-}
 
-getCursos(asignatura:number, periodo:number): Observable<any>{
-  return this.http.get(this.Url+"curso/"+asignatura+"/"+periodo);
-}
+  getPeriodos(): Observable<any> {
+    return this.http.get<Periodo>(this.Url + "periodo/");
+  }
 
-getCurso(nrc:number): Observable<any>{
-  return this.http.get(this.Url+"curso/"+nrc);
-}
+  getAsignaturas(departamento: number, periodo: number): Observable<any> {
+    return this.http.get<Asignatura>(this.Url + "asignatura/" + departamento + "/" + periodo);
+  }
 
-matricularse(matricula:MatriculaRQ){
-  return this.http.post(this.Url+"matricula/",matricula);
-}
+  getCursos(asignatura: number, periodo: number): Observable<any> {
+    return this.http.get(this.Url + "curso/" + asignatura + "/" + periodo);
+  }
+
+  getCurso(nrc: number): Observable<any> {
+    return this.http.get(this.Url + "curso/" + nrc);
+  }
+
+  matricularse(matricula: MatriculaRQ) {
+    return this.http.post(this.Url + "matricula/", matricula);
+  }
+
+  buscarMatricula(correo: String | null, periodo: number): Observable<any> {
+    return this.http.get(this.Url + "matricula/?correo=" + correo + "&periodo=" + periodo);
+  }
+
+  borrarDetalleMatricula(codigo: number) {
+    return this.http.delete(this.Url + "matricula/" + codigo);
+  }
+
+  obtenerAllCarreras(): Observable<any> {
+    return this.http.get(this.Url + "carrera");
+  }
+
+  obtenerAllMatriculasEstudiante(correo: String | null): Observable<any> {
+    return this.http.get(this.Url + "matricula/"+correo);
+  }
 
 }

@@ -2,8 +2,8 @@
   <form class="form-signin" [formGroup]="login" (ngSubmit)="Verificar()">
     <img class="mb-4" src="https://www.espe.edu.ec/wp-content/uploads/2018/11/espe.png" alt="" width="250"
       height="72">
-    <h1 class="h3 mb-3 font-weight-normal">Inicie Sessión</h1>
-    <label for="inputEmail" class="sr-only">Correo Electronico</label>
+    <h1 class="h3 mb-3 font-weight-normal"><b>Inicie Sessión</b></h1>
+    <label>Correo Electronico</label>
     <input type="correo" class="form-control" formControlName="correo" placeholder="ejemplo@tutia.com">
     <div *ngIf="login.controls['correo'].invalid && (login.controls['correo'].dirty || login.controls['correo'].touched)" class="alert alert-danger">
 
@@ -14,7 +14,8 @@
         Correo Invalido
       </div>
     </div>
-    <label for="inputPassword" class="sr-only">Contraseña</label>
+    <br>
+    <label>Contraseña</label>
     <input type="password" class="form-control" formControlName="password" placeholder="contraseña">
     <div *ngIf="login.controls['password'].invalid && (login.controls['password'].dirty || login.controls['password'].touched)" class="alert alert-danger">
 
@@ -23,5 +24,7 @@
       </div>
     </div>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+    <br>
+    <a class="btn btn-outline-success" type="button" (click)="registrar()">Nuevo Estudiante</a>
   </form>
 </body>

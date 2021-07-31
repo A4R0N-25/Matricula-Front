@@ -83,6 +83,8 @@ export class TablaComponent implements OnInit {
   seleccion(){
     if(this.departamento != 0 && this.periodo != 0 && this.departamento != undefined && this.periodo != undefined){
       this.getAsignaturas();
+    }else{
+      this.listaAsignaturas=[]
     }
   }
 

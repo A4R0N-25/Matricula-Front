@@ -54,14 +54,14 @@
         <th scope="col">ELIMINAR</th>
       </tr>
     </thead>
-    <tbody *ngFor="let cur of cursos">
+    <tbody *ngFor="let det of matriculaInfo.detalles">
       <tr>
-        <th scope="row">{{cur.nrc}}</th>
-        <td>{{cur.asignatura}}</td>
-        <td>{{cur.creditos}}</td>
+        <th scope="row">{{det.nrc}}</th>
+        <td>{{det.materia}}</td>
+        <td>{{det.creditos}}</td>
         <td>
           <a mat-mini-fab color="warn" aria-label="Example icon button with a delete icon"
-            (click)="borrarCurso(cur.nrc)">
+            (click)="borrarDetalleMatricula(det)">
             <mat-icon>delete</mat-icon>
           </a>
         </td>

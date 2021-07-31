@@ -18,6 +18,13 @@ import { LoginServiceService } from './services/loginService.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiciosService } from './services/servicios/Servicios.service';
 import {MatInputModule} from '@angular/material/input';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { RegistrarComponent } from './paginas/registrar/registrar.component';
+import { PerfilComponent } from './paginas/Perfil/Perfil.component';
+import { MatriculasComponent } from './paginas/matriculas/matriculas.component';
+import {TableModule} from 'primeng/table';
+import {ButtonModule} from 'primeng/button';
+
 
 
 @NgModule({
@@ -26,7 +33,10 @@ import {MatInputModule} from '@angular/material/input';
     LoginComponent,
     PrincipalComponent,
     TablaComponent,
-    MatriculaComponent
+    MatriculaComponent,
+    RegistrarComponent,
+    PerfilComponent,
+    MatriculasComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +49,10 @@ import {MatInputModule} from '@angular/material/input';
     NgbModule,
     MatButtonModule,
     HttpClientModule,
-    MatInputModule
+    MatInputModule,
+    MatSnackBarModule,
+    TableModule,
+    ButtonModule
   ],
   providers: [LoginServiceService,ServiciosService],
   bootstrap: [AppComponent]
