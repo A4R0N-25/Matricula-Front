@@ -26,7 +26,7 @@
        </div>
     </div><br>
     <label>Nombre</label>
-    <input type="text" class="form-control" formControlName="nombre" placeholder="Daniel" pattern="[A-Za-z]{0,50}">
+    <input type="text" class="form-control" formControlName="nombre" placeholder="Daniel" pattern="[A-Za-z ]{0,50}">
     <div *ngIf="registrar.controls['nombre'].invalid && (registrar.controls['nombre'].dirty || registrar.controls['nombre'].touched)" class="alert alert-danger">
 
       <div *ngIf="registrar.controls['nombre'].errors?.required">
@@ -37,7 +37,7 @@
        </div>
     </div><br>
     <label>Apellido</label>
-    <input type="text" class="form-control" formControlName="apellido" placeholder="Yandun" pattern="[A-Za-z]{0,50}">
+    <input type="text" class="form-control" formControlName="apellido" placeholder="Yandun" pattern="[A-Za-z ]{0,50}">
     <div *ngIf="registrar.controls['apellido'].invalid && (registrar.controls['apellido'].dirty || registrar.controls['apellido'].touched)" class="alert alert-danger">
 
       <div *ngIf="registrar.controls['apellido'].errors?.required">
@@ -56,12 +56,12 @@
         <mat-icon>school</mat-icon> <b> Carrera</b>
       </mat-label>
     </mat-form-field><br>
-    <label>Correo Electronico</label>
-    <input type="correo" class="form-control" formControlName="correo" placeholder="ejemplo@tutia.com">
+    <label>Usuario</label>
+    <input type="correo" class="form-control" formControlName="correo" placeholder="juanito1">
     <div *ngIf="registrar.controls['correo'].invalid && (registrar.controls['correo'].dirty || registrar.controls['correo'].touched)" class="alert alert-danger">
 
       <div *ngIf="registrar.controls['correo'].errors?.required">
-       Se requiere un correo electronico
+       Se requiere un nombre de Usuario
       </div>
       <div *ngIf="registrar.controls['correo'].errors?.email">
         Correo Invalido

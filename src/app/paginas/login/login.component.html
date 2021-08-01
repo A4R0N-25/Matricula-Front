@@ -3,12 +3,12 @@
     <img class="mb-4" src="https://www.espe.edu.ec/wp-content/uploads/2018/11/espe.png" alt="" width="250"
       height="72">
     <h1 class="h3 mb-3 font-weight-normal"><b>Inicie Sessión</b></h1>
-    <label>Correo Electronico</label>
-    <input type="correo" class="form-control" formControlName="correo" placeholder="ejemplo@tutia.com">
+    <label>Usuario</label>
+    <input type="correo" class="form-control" formControlName="correo" placeholder="pedro35">
     <div *ngIf="login.controls['correo'].invalid && (login.controls['correo'].dirty || login.controls['correo'].touched)" class="alert alert-danger">
 
       <div *ngIf="login.controls['correo'].errors?.required">
-       Se requiere un correo electronico
+       Se requiere un Usuario
       </div>
       <div *ngIf="login.controls['correo'].errors?.email">
         Correo Invalido

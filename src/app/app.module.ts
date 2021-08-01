@@ -24,6 +24,8 @@ import { PerfilComponent } from './paginas/Perfil/Perfil.component';
 import { MatriculasComponent } from './paginas/matriculas/matriculas.component';
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
+import { InicioComponent } from './paginas/inicio/inicio.component';
+import { DatosComponent } from './paginas/datos/datos.component';
 
 
 
@@ -36,7 +38,9 @@ import {ButtonModule} from 'primeng/button';
     MatriculaComponent,
     RegistrarComponent,
     PerfilComponent,
-    MatriculasComponent
+    MatriculasComponent,
+    InicioComponent,
+    DatosComponent
   ],
   imports: [
     BrowserModule,

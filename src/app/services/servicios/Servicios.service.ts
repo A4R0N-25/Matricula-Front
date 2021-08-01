@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Actualizacion } from 'src/app/model/actualizacion';
 import { Asignatura } from 'src/app/model/asignatura';
 import { Departmanento } from 'src/app/model/departamento';
+import { Estudiante } from 'src/app/model/estudiante';
 import { MatriculaRQ } from 'src/app/model/matriculaRQ';
 import { Periodo } from 'src/app/model/periodo';
 
@@ -57,4 +59,15 @@ export class ServiciosService {
     return this.http.get(this.Url + "matricula/"+correo);
   }
 
+  obtenerEstudiante(correo:String | null): Observable<any> {
+    return this.http.get(this.Url + "estudiante/"+correo);
+  }
+
+  nuevoEstudiante(estudiante:Estudiante){
+    return this.http.post(this.Url + "estudiante/",estudiante);
+  }
+
+  actualizarEstudiante(usuario:String,estudiante:Actualizacion){
+    return this.http.put(this.Url + "estudiante/"+usuario,estudiante);
+  }
 }

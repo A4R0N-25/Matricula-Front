@@ -3,4 +3,5 @@ export class MatriculaDetalle{
     nrc!:number;
     materia!: String;
     creditos!: number;
+    estado!:String;
 }

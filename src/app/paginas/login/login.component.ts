@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   constructor(private route: Router, private service: LoginServiceService) { }
 
   login = new FormGroup({
-    correo: new FormControl('', [Validators.required, Validators.email]),
+    correo: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
 
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
 
   Verificar() {
     let user = new Login();
-    user.correo = this.login.controls['correo'].value;
+    user.correo = this.login.controls['correo'].value+"@espe.edu.ec";
     user.password = this.login.controls['password'].value;
 
     this.service.autenticar(user).then(data => {
@@ -45,22 +45,20 @@ export class LoginComponent implements OnInit {
         showConfirmButton: false,
         timer: 1500
       })
-      sessionStorage.setItem('correo', this.login.controls['correo'].value)
-      var correo = this.login.controls['correo'].value.split("@");
-      sessionStorage.setItem('nombre', correo[0]);
+      sessionStorage.setItem('correo', this.login.controls['correo'].value+"@espe.edu.ec")
+      sessionStorage.setItem('nombre', this.login.controls['correo'].value);
       this.route.navigate(["principal"]);
     },err => {
-      console.log("Falla de validacion")
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Error en Credenciales',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      this.login.controls['password'].reset();
+      this.login.markAllAsTouched();
     })
-    Swal.fire({
-      position: 'top-end',
-      icon: 'error',
-      title: 'Error en Credenciales',
-      showConfirmButton: false,
-      timer: 1500
-    })
-    this.login.controls['password'].reset();
-    this.login.markAllAsTouched();
 
   }
 
