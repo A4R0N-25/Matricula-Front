@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2'
 import { LoginServiceService } from 'src/app/services/loginService.service';
 import { Login } from 'src/app/model/login';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { Login } from 'src/app/model/login';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private route: Router, private service: LoginServiceService) { }
+  constructor(private route: Router, private service: LoginServiceService,private _snackBar: MatSnackBar) { }
 
   login = new FormGroup({
     correo: new FormControl('', [Validators.required]),
@@ -49,13 +50,7 @@ export class LoginComponent implements OnInit {
       sessionStorage.setItem('nombre', this.login.controls['correo'].value);
       this.route.navigate(["principal"]);
     },err => {
-      Swal.fire({
-        position: 'top-end',
-        icon: 'error',
-        title: 'Error en Credenciales',
-        showConfirmButton: false,
-        timer: 1500
-      })
+      this._snackBar.open(err.error, "cerrar",{duration:2500});
       this.login.controls['password'].reset();
       this.login.markAllAsTouched();
     })

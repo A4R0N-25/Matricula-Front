@@ -49,7 +49,7 @@ export class MatriculaComponent implements OnInit {
 
   buscarMatricula() {
     this.service.buscarMatricula(sessionStorage.getItem('correo'), this.per).subscribe(res => {
-      console.log(res)
+      //console.log(res)
       this.matriculaInfo = {
         codigo: res.codigo,
         periodo: res.periodo,
@@ -118,7 +118,7 @@ export class MatriculaComponent implements OnInit {
         horarios: res.horarios
       })
     }, error => {
-      this._snackBar.open("NRC no encontrado", "cerrar");
+      this._snackBar.open("NRC no encontrado", "cerrar",{duration:2500});
     })
   }
 
@@ -136,22 +136,40 @@ export class MatriculaComponent implements OnInit {
       })
       this.cursos = []
       this.creditos=0
-      console.log("Matricula:" + this.matricula.matricula)
+      /*console.log("Matricula:" + this.matricula.matricula)
       console.log("Matricula:" + this.matricula.correo)
       console.log("Matricula:" + this.matricula.periodo)
-      console.log("Matricula:" + this.matricula.cursos)
+      console.log("Matricula:" + this.matricula.cursos)*/
       this.service.matricularse(this.matricula).subscribe(res => {
         this.buscarMatricula()
-        Swal.fire('Matriculado exitosamente')
+        //console.log(res)
+        res.forEach((element: string,index: number) => {
+          setTimeout(() => {
+              
+            this._snackBar.open(element, "cerrar", {
+                duration: 2500,
+                verticalPosition: 'bottom', // 'top' | 'bottom'
+                horizontalPosition: 'center' //'start' | 'center' | 'end' | 'left' | 'right'
+            });
+            
+
+        }, index * (2500+500));
+        });
       }, error => {
         //Swal.fire('No se realizo la matricula')
         console.log(error.error)
-        error.error.forEach((element: string) => {
-          console.log("error: " + element)
-          this._snackBar.open(element, "cerrar");
+        error.error.forEach((element: string, index: any) => {
+          //console.log("error: " + element)
           setTimeout(() => {
+              
+            this._snackBar.open(element, "cerrar", {
+                duration: 2500,
+                verticalPosition: 'bottom', // 'top' | 'bottom'
+                horizontalPosition: 'center' //'start' | 'center' | 'end' | 'left' | 'right'
+            });
             
-          }, 200);
+
+        }, index * (2500+500));
         });
       })
     } else {

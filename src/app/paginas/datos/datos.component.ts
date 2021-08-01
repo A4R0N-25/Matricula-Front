@@ -71,13 +71,10 @@ registrarse() {
       })
       this.route.navigate(["principal/matriculas"]);
     }, error =>{
-      this._snackBar.open("Hubo un error", "cerrar");
+      this._snackBar.open("Hubo un error", "cerrar",{duration:2500});
     })
   } else {
-    this._snackBar.open("Complete todos los campos", "cerrar");
-    if (this.registrar.controls['telefono'].value == '') {
-      console.log("hola")
-    }
+    this._snackBar.open("Complete todos los campos", "cerrar",{duration:2500});
   }
 }
 }

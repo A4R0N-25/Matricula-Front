@@ -1,71 +1,76 @@
-<div class="example-container">
-  <form [formGroup]="busqueda" (ngSubmit)="matricularse()">
-    <h2><b>Seleccione un periodo</b></h2>
-    <mat-form-field appearance="fill" class="formulario">
-      <mat-select formControlName="periodo" required [(ngModel)]="per" (selectionChange)="seleccion()">
-        <mat-option>-- None --</mat-option>
-        <mat-option *ngFor="let per of listaPeriodos" [value]="per.codigo">{{ per.nombre }}</mat-option>
-      </mat-select>
-      <mat-label>
-        <mat-icon>date_range</mat-icon> <b> Periodo</b>
-      </mat-label>
-    </mat-form-field>
-
-    <div #collapse="ngbCollapse" [(ngbCollapse)]="nrc" style="overflow: overlay; height: 100%;">
-      <div class="clearfix"></div>
-      <h3><b>Seleccione sus cursos:</b></h3>
-      <mat-form-field class="example-form-field" appearance="fill">
-        <mat-label>Ingrese el NRC</mat-label>
-        <input matInput type="number" formControlName="curso" [(ngModel)]="codigoCurso">
+<div style="overflow: overlay; height: 100%; display: flex;position: relative;">
+  <div class="example-container">
+    <form [formGroup]="busqueda" (ngSubmit)="matricularse()">
+      <h2><b>Seleccione un periodo</b></h2>
+      <mat-form-field appearance="fill" class="formulario">
+        <mat-select formControlName="periodo" required [(ngModel)]="per" (selectionChange)="seleccion()">
+          <mat-option>-- None --</mat-option>
+          <mat-option *ngFor="let per of listaPeriodos" [value]="per.codigo">{{ per.nombre }}</mat-option>
+        </mat-select>
+        <mat-label>
+          <mat-icon>date_range</mat-icon> <b> Periodo</b>
+        </mat-label>
       </mat-form-field>
-      <a mat-fab color="primary" (click)="addNRC()">
-        <mat-icon>add</mat-icon>
-      </a>
 
-      <h4><b>Creditos totales (max 50):</b> {{creditos}}</h4>
-      <h4><b>Cursos agregados:</b></h4>
-      <ul>
-        <div *ngFor="let cur of cursos">
-          <li><b>{{cur.nrc}} : </b>{{cur.asignatura}}
-            <a mat-mini-fab color="warn" aria-label="Example icon button with a delete icon"
-              (click)="borrarCurso(cur.nrc)">
+      <div #collapse="ngbCollapse" [(ngbCollapse)]="nrc">
+        <div class="clearfix"></div>
+        <h3><b>Seleccione sus cursos:</b></h3>
+        <mat-form-field class="example-form-field" appearance="fill">
+          <mat-label>Ingrese el NRC</mat-label>
+          <input matInput type="number" formControlName="curso" [(ngModel)]="codigoCurso">
+        </mat-form-field>
+        <a mat-mini-fab color="primary" (click)="addNRC()">
+          <mat-icon>add</mat-icon>
+        </a>
+
+        <h4><b>Creditos totales (max 50):</b> {{creditos}}</h4>
+        <h4><b>Cursos agregados:</b></h4>
+        <ul>
+          <div *ngFor="let cur of cursos">
+            <li><b>{{cur.nrc}} : </b>{{cur.asignatura}}
+              <a mat-button color="" aria-label="Example icon button with a delete icon"
+                (click)="borrarCurso(cur.nrc)">
+                <mat-icon>clear</mat-icon>
+              </a>
+            </li>
+          </div>
+        </ul>
+
+      </div>
+      <br>
+      <button mat-raised-button color="primary" type="submit">Matricularse</button>
+
+    </form>
+  </div>
+
+  <div style="padding-left: 10%;">
+    <h2><b>RESUMEN</b></h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">NRC</th>
+          <th scope="col">MATERIA</th>
+          <th scope="col">CREDITOS</th>
+          <th scope="col">ELIMINAR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let det of matriculaInfo.detalles">
+          <th scope="row">{{det.nrc}}</th>
+          <td>{{det.materia}}</td>
+          <td>{{det.creditos}}</td>
+          <td>
+            <a mat-flat-button color="warn" aria-label="Example icon button with a delete icon"
+              (click)="borrarDetalleMatricula(det)">
               <mat-icon>delete</mat-icon>
             </a>
-          </li>
-        </div>
-      </ul>
-
-    </div>
-
-    <br>
-    <button mat-raised-button color="primary" type="submit">Matricularse</button>
-
-  </form>
-</div>
-
-<div>
-  <h2><b>RESUMEN</b></h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">NRC</th>
-        <th scope="col">MATERIA</th>
-        <th scope="col">CREDITOS</th>
-        <th scope="col">ELIMINAR</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let det of matriculaInfo.detalles">
-      <tr>
-        <th scope="row">{{det.nrc}}</th>
-        <td>{{det.materia}}</td>
-        <td>{{det.creditos}}</td>
-        <td>
-          <a mat-mini-fab color="warn" aria-label="Example icon button with a delete icon"
-            (click)="borrarDetalleMatricula(det)">
-            <mat-icon>delete</mat-icon>
-          </a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"><b>Creditos Totales:</b></td>
+          <td colspan="2">{{matriculaInfo.creditosTotales}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

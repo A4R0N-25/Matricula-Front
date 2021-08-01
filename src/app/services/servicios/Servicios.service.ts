@@ -39,7 +39,7 @@ export class ServiciosService {
     return this.http.get(this.Url + "curso/" + nrc);
   }
 
-  matricularse(matricula: MatriculaRQ) {
+  matricularse(matricula: MatriculaRQ): Observable<any> {
     return this.http.post(this.Url + "matricula/", matricula);
   }
 

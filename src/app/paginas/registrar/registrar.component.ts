@@ -77,10 +77,10 @@ export class RegistrarComponent implements OnInit {
         sessionStorage.setItem('nombre', this.registrar.controls['correo'].value);
         this.route.navigate(["principal"]);
       }, error =>{
-        this._snackBar.open("Hubo un error", "cerrar");
+        this._snackBar.open(error.error, "cerrar",{duration:2500});
       })
     } else {
-      this._snackBar.open("Complete todos los campos", "cerrar");
+      this._snackBar.open("Complete todos los campos", "cerrar",{duration:2500});
     }
   }
 }
