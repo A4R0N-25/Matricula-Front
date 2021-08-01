@@ -46,7 +46,7 @@ getEstudiante(){
       direccion: res.direccion,
       genero: res.genero,
       carrera: res.carrera,
-      contraseña: res.contraseña
+      contrasena: res.contraseña
     }
   })
 }

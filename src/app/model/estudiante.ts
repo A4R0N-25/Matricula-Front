@@ -9,6 +9,6 @@ export class Estudiante{
     telefono!:String;
     direccion!:String;
     carrera!:String | number;
-    contraseña!: String | null;
+    contrasena!: String | null;
 
 }

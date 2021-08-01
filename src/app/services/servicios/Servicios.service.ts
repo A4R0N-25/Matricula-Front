@@ -15,7 +15,7 @@ export class ServiciosService {
 
   constructor(private http: HttpClient) { }
 
-  Url = 'http://localhost:8080/api/';
+  Url = 'http://35.237.120.101:8080/api/';
 
 
   getDepartamentos(): Observable<any> {

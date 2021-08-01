@@ -61,7 +61,7 @@ export class RegistrarComponent implements OnInit {
         correo: this.registrar.controls["correo"].value,
         carrera: this.registrar.controls["career"].value,
         genero: this.registrar.controls["genero"].value,
-        contraseña: this.registrar.controls["password"].value,
+        contrasena: this.registrar.controls["password"].value,
         telefono: this.registrar.controls["telefono"].value,
         direccion: this.registrar.controls["direccion"].value
       }
