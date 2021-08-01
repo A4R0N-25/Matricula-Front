@@ -70,7 +70,7 @@
                 <td>{{detalle.materia}}</td>
                 <td>{{detalle.creditos}}</td>
                 <td><span [class]="'detalle-' + detalle.estado.toLowerCase()">{{detalle.estado=='APR' ? "APROBADO" :
-                        "REPROBADO" }}</span></td>
+                    detalle.estado=='REP' ? "REPROBADO" : "CURSANDO" }}</span></td>
             </tr>
         </ng-template>
         <ng-template pTemplate="emptymessage">
