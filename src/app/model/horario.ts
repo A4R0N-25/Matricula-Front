@@ -1,5 +1,5 @@
 export class Horario{
     dia!: String;
-    incio !: Date;
-    fin !: Date;
+    horaInicio !: Date;
+    horaFin !: Date;
 }

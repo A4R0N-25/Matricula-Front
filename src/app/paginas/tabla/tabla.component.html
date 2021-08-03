@@ -1,92 +1,85 @@
 <div style="overflow-y: auto; height: 100%;">
-<div id="filtro">
-  <h1><b>Busqueda de Materias</b></h1>
-  <div class="example-container">
-    <form [formGroup]="busqueda" (ngSubmit)="Filtrar()">
-      <mat-form-field appearance="fill" class="formulario">
-        <mat-select formControlName="periodo" required [(ngModel)]="periodo" (selectionChange)="seleccion()">
-          <mat-option>-- None --</mat-option>
-          <mat-option *ngFor="let per of listaPeriodos" [value]="per.codigo">{{ per.nombre }}</mat-option>
-        </mat-select>
-        <mat-label>
-          <mat-icon>date_range</mat-icon> <b> Periodo</b>
-        </mat-label>
-      </mat-form-field>
+  <div id="filtro">
+    <h1><b>Busqueda de Materias</b></h1>
+    <div class="example-container">
+      <form [formGroup]="busqueda" (ngSubmit)="Filtrar()">
+        <mat-form-field appearance="fill" class="formulario">
+          <mat-select formControlName="periodo" required [(ngModel)]="periodo" (selectionChange)="seleccion()">
+            <mat-option>-- None --</mat-option>
+            <mat-option *ngFor="let per of listaPeriodos" [value]="per.codigo">{{ per.nombre }}</mat-option>
+          </mat-select>
+          <mat-label>
+            <mat-icon>date_range</mat-icon> <b> Periodo</b>
+          </mat-label>
+        </mat-form-field>
 
-      <mat-form-field appearance="fill" class="formulario">
-        <mat-select formControlName="departamento" required [(ngModel)]="departamento"
-          (selectionChange)="seleccion()">
-          <mat-option>-- None --</mat-option>
-          <mat-option *ngFor="let dep of listaDepartamentos" [value]="dep.codigo">{{ dep.nombre }}</mat-option>
-        </mat-select>
-        <mat-label>
-          <mat-icon>apartment</mat-icon> <b> Departamento</b>
-        </mat-label>
-      </mat-form-field>
+        <mat-form-field appearance="fill" class="formulario">
+          <mat-select formControlName="departamento" required [(ngModel)]="departamento"
+            (selectionChange)="seleccion()">
+            <mat-option>-- None --</mat-option>
+            <mat-option *ngFor="let dep of listaDepartamentos" [value]="dep.codigo">{{ dep.nombre }}</mat-option>
+          </mat-select>
+          <mat-label>
+            <mat-icon>apartment</mat-icon> <b> Departamento</b>
+          </mat-label>
+        </mat-form-field>
 
-      <mat-form-field appearance="fill" class="formulario">
-        <mat-select formControlName="materia" required [(ngModel)]="asignatura">
-          <mat-option>-- None --</mat-option>
-          <mat-option *ngFor="let asig of listaAsignaturas" [value]="asig.codigo">{{ asig.nombre }}</mat-option>
-        </mat-select>
-        <mat-label>
-          <mat-icon>school</mat-icon> <b> Materia</b>
-        </mat-label>
-      </mat-form-field>
-      <button mat-fab color="primary" type="submit">
-        <mat-icon>manage_search</mat-icon>
-      </button>
-    </form>
-  </div>
-</div>
-
-
-<div #collapse="ngbCollapse" [(ngbCollapse)]="buscar" style="overflow: auto; height: 100%;">
-  <div class="clearfix"></div>
-
-  <div class="encabezado">
-    <h1><b>Resultados</b></h1>
-    <h2><b>Periodo</b> PREGRADO S-I MAY21 - SEP21</h2>
-    <h2><b>Departamento</b> CIENCIAS DE LA COMPUTACION</h2>
-    <h2><b>Asignatura</b> APLICACIONES DISTRIBUIDAS</h2>
-
+        <mat-form-field appearance="fill" class="formulario">
+          <mat-select formControlName="materia" required [(ngModel)]="asignatura">
+            <mat-option>-- None --</mat-option>
+            <mat-option *ngFor="let asig of listaAsignaturas" [value]="asig.codigo">{{ asig.nombre }}</mat-option>
+          </mat-select>
+          <mat-label>
+            <mat-icon>school</mat-icon> <b> Materia</b>
+          </mat-label>
+        </mat-form-field>
+        <button mat-fab color="primary" type="submit">
+          <mat-icon>manage_search</mat-icon>
+        </button>
+      </form>
+    </div>
   </div>
 
-  <div class="table-responsive">
-    <table class="table table-bordered">
-      <tbody>
-        <tr *ngFor="let per of listaCursos">
-          <td><b>NRC: </b>{{per.nrc}}</td>
-          <td><b>Cupo: </b>{{per.cupo}}</td>
-          <td><b>Disponible: </b>{{per.disponible}}</td>
-          <td><b>N° de Creditos: </b>{{per.creditos}}</td>
-          <td><b>Carreras:</b>{{per.carreras}}</td>
-          <td>
-            <b>Horario</b><br>
-            <table style="width: 100%;">
-              <thead>
-                <th>Lunes</th>
-                <th>Martes</th>
-                <th>Miercoles</th>
-                <th>Jueves</th>
-                <th>Viernes</th>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{{listaHorario.LUN}}</td>
-                  <td>{{listaHorario.MAR}}</td>
-                  <td>{{listaHorario.MIE}}</td>
-                  <td>{{listaHorario.JUE}}</td>
-                  <td>{{listaHorario.VIE}}</td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-        </tr>
+
+  <div #collapse="ngbCollapse" [(ngbCollapse)]="buscar" style="overflow: auto; height: 100%;">
+    <div class="clearfix"></div>
+
+    <div class="encabezado">
+      <h1><b>Resultados</b></h1>
+
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <tbody>
+          <tr *ngFor="let per of listaCursos">
+            <td><b>NRC: </b>{{per.nrc}}</td>
+            <td><b>Cupo: </b>{{per.cupo}}</td>
+            <td><b>Disponible: </b>{{per.disponible}}</td>
+            <td><b>N° de Creditos: </b>{{per.creditos}}</td>
+            <td><b>Carreras:</b>{{per.carreras}}</td>
+            <td>
+              <b>Horario</b><br>
+              <table style="width: 100%;">
+                <thead>
+                  <th>Dia</th>
+                  <th>Inicio</th>
+                  <th>Fin</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let tim of per.horarios">
+                    <td>{{tim.dia}}</td>
+                    <td>{{tim.horaInicio}}</td>
+                    <td>{{tim.horaFin}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
 
 
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
 </div>

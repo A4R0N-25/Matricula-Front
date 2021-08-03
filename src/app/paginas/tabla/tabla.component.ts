@@ -45,6 +45,7 @@ export class TablaComponent implements OnInit {
   Filtrar(){
     console.log("asignatira:"+this.asignatura)
     if(this.busqueda.valid && this.asignatura!=0){
+      this.buscar=false;
       this.getCursos()
       this.buscar=false;
     }else{
@@ -104,8 +105,8 @@ export class TablaComponent implements OnInit {
 
   getCursos(){
     this.service.getCursos(this.asignatura, this.periodo).subscribe(res => {
-      this.listaCursos.length=0
-      console.log(res)
+      this.listaCursos=[]
+      console.log(this.listaCursos)
       res.forEach((element: {codigo: any; nrc: any; cupo: any; asignatura: any; disponible: any; creditos: any; carreras: any; horarios: any; }) => {
         this.listaCursos.push({
           codigo: element.codigo,
@@ -117,13 +118,17 @@ export class TablaComponent implements OnInit {
           carreras: element.carreras,
           horarios: element.horarios
         })
+        /*this.listaHorario = {
+          "LUN": "", "MAR":"","MIE":"","JUE":"","VIE":""
+        }*/
+        /*console.log(element)
         element.horarios.forEach((hor:any) => {
-          hor.dia == "LUN" ? this.listaHorario.LUN=hor.horaInicio.toString().replace(/.^\:00$/,"")+" - "+hor.horaFin.toString() : null
-          hor.dia == "MAR" ? this.listaHorario.MAR=hor.horaInicio.toString()+" - "+hor.horaFin.toString() : null
-          hor.dia == "MIE" ? this.listaHorario.MIE=hor.horaInicio.toString()+" - "+hor.horaFin.toString() : null
-          hor.dia == "JUE" ? this.listaHorario.JUE=hor.horaInicio.toString()+" - "+hor.horaFin.toString() : null
-          hor.dia == "VIE" ? this.listaHorario.VIE=hor.horaInicio.toString()+" - "+hor.horaFin.toString() : null
-        });
+          hor.dia == "LUN" ? this.listaHorario.LUN=hor.horaInicio.toString().replace(/.^\:00$/,"")+" - "+hor.horaFin.toString() : ""
+          hor.dia == "MAR" ? this.listaHorario.MAR=hor.horaInicio.toString()+" - "+hor.horaFin.toString() : ""
+          hor.dia == "MIE" ? this.listaHorario.MIE=hor.horaInicio.toString()+" - "+hor.horaFin.toString() : ""
+          hor.dia == "JUE" ? this.listaHorario.JUE=hor.horaInicio.toString()+" - "+hor.horaFin.toString() : ""
+          hor.dia == "VIE" ? this.listaHorario.VIE=hor.horaInicio.toString()+" - "+hor.horaFin.toString() : ""
+        });*/
         
       });
     })
