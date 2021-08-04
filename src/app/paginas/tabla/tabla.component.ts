@@ -32,6 +32,10 @@ export class TablaComponent implements OnInit {
   }
   dias=["LUN", "MAR","MIE","JUE","VIE"]
 
+  perResultado:String=""
+  depResultado:String=""
+  asigResultado:String=""
+
 
   periodo: number=0;
   departamento: number =0;
@@ -45,12 +49,22 @@ export class TablaComponent implements OnInit {
   Filtrar(){
     console.log("asignatira:"+this.asignatura)
     if(this.busqueda.valid && this.asignatura!=0){
-      this.buscar=false;
+      this.buscar=true;
+      this.getResultadosName(this.periodo,this.departamento,this.asignatura)
       this.getCursos()
       this.buscar=false;
     }else{
       this.buscar=true;
     }
+  }
+
+  getResultadosName(per:number, dep:number, asig:number){
+    var perRes=this.listaPeriodos.filter(x => x.codigo === per);
+    this.perResultado=perRes[0].nombre.toUpperCase()
+    var depRes=this.listaDepartamentos.filter(x => x.codigo === dep);
+    this.depResultado=depRes[0].nombre.toUpperCase()
+    var asigRes=this.listaAsignaturas.filter(x => x.codigo === asig);
+    this.asigResultado=asigRes[0].nombre.toUpperCase()
   }
 
   getDepartamentos(){
